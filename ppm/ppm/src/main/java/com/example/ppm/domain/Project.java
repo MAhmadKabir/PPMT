@@ -7,6 +7,7 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class Project {
@@ -27,10 +28,34 @@ public class Project {
 	@JsonFormat(pattern="yyyy-mm-dd")
 	private Date end_date;
 	@JsonFormat(pattern="yyyy-mm-dd")
+	@Column(updatable = false)
 	private Date created_At;
 	@JsonFormat(pattern="yyyy-mm-dd")
 	private Date updated_At;
 	
+	@OneToOne(fetch = FetchType.EAGER, cascade= CascadeType.ALL, mappedBy ="project")
+	@JsonIgnore
+	private Backlog backlog;
+
+	   @ManyToOne(fetch = FetchType.LAZY)
+	    @JsonIgnore
+	    private User user;
+	
+	   private String projectLeader;
+
+	   
+	   /**
+	 * @return the backlog
+	 */
+	public Backlog getBacklog() {
+		return backlog;
+	}
+	/**
+	 * @param backlog the backlog to set
+	 */
+	public void setBacklog(Backlog backlog) {
+		this.backlog = backlog;
+	}
 	public Project() {}
 	@PrePersist
 	protected void onCreate() {
@@ -88,6 +113,24 @@ public class Project {
 	@PreUpdate
 	protected void onUpdate() {
 		this.updated_At = new Date();
+	}
+	public String getProjectLeader() {
+		return projectLeader;
+	}
+	public void setProjectLeader(String projectLeader) {
+		this.projectLeader = projectLeader;
+	}
+	/**
+	 * @return the user
+	 */
+	public User getUser() {
+		return user;
+	}
+	/**
+	 * @param user the user to set
+	 */
+	public void setUser(User user) {
+		this.user = user;
 	}
 	
 
