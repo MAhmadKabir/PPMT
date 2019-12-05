@@ -20,6 +20,21 @@ class Header extends Component {
               Dashboard
             </Link>
           </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/enter">
+              Test
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/mdb">
+              Test1
+            </Link>
+          </li>
+          <li className="nav-item">
+            <Link className="nav-link" to="/test">
+              Test2
+            </Link>
+          </li>
         </ul>
 
         <ul className="navbar-nav ml-auto">

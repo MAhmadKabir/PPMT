@@ -37,12 +37,13 @@ class ProjectBoard extends Component {
               {errors.projectNotFound}
             </div>
           );
-        }else if (errors.projectIdentifier) {
+        } else if (errors.projectIdentifier) {
           return (
             <div className="alert alert-danger text-center" role="alert">
               {errors.projectIdentifier}
             </div>
-          );} else {
+          );
+        } else {
           return (
             <div className="alert alert-info text-center" role="alert">
               No Project Tasks on this board
@@ -58,6 +59,9 @@ class ProjectBoard extends Component {
       <div className="container">
         <Link to={`/addProjectTask/${id}`} className="btn btn-primary mb-3">
           <i className="fas fa-plus-circle"> Create Project Task</i>
+        </Link>
+        <Link to={`/bulkProjectTask/${id}`} className="btn btn-primary mb-3">
+          <i className="fas fa-plus-circle"> Bulk Project Tasks</i>
         </Link>
         <br />
         <hr />
@@ -75,7 +79,4 @@ const mapStateToProps = state => ({
   backlog: state.backlog,
   errors: state.errors
 });
-export default connect(
-  mapStateToProps,
-  { getBacklog }
-)(ProjectBoard);
+export default connect(mapStateToProps, { getBacklog })(ProjectBoard);

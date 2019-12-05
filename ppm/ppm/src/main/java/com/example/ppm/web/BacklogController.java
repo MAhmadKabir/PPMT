@@ -1,6 +1,7 @@
 package com.example.ppm.web;
 
 import java.security.Principal;
+import java.util.List;
 
 import javax.validation.Valid;
 
@@ -41,6 +42,16 @@ public class BacklogController {
 		
 		ProjectTask projectTask1 = projectTaskService.addProjectTask(backlog_id, projectTask, principal.getName());
 		return new ResponseEntity<ProjectTask>(projectTask1, HttpStatus.CREATED);	
+	}
+	@PostMapping("bulk/{backlog_id}")
+	public ResponseEntity<?> addBulkPTtoBacklog(@Valid @RequestBody List<ProjectTask> projectTask, BindingResult result,
+			@PathVariable String backlog_id,Principal principal ){
+		
+		ResponseEntity<?> errormap = mapValidationErrorService.MapValidationService(result);
+		if(errormap!= null) { return errormap;}
+		
+		List<ProjectTask> projectTask1 = projectTaskService.addBulkProjectTask(backlog_id, projectTask, principal.getName());
+		return new ResponseEntity <List<ProjectTask>>(projectTask1, HttpStatus.CREATED);	
 	}
 	@GetMapping("/{backlog_id}")
 //	public Iterable<ProjectTask> getProjectBacklog(@PathVariable String backlog_id){

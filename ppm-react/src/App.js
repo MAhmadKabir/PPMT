@@ -19,6 +19,11 @@ import setJWTToken from "./securityUtils/setJWTToken";
 import { SET_CURRENT_USER } from "./actions/types";
 import { logout } from "./actions/securityActions";
 import SecuredRoute from "./securityUtils/SecureRoute";
+import DT from "./components/Testings/DT";
+import MDB from "./components/Testings/MDB";
+import Parent from "./components/Testings/DisplayMessages";
+import Child from "./components/Testings/Arrays";
+import BulkProjectTasks from "./components/ProjectBoard/ProjectTasks/BulkProjectTasks";
 
 const jwtToken = localStorage.jwtToken;
 
@@ -58,6 +63,10 @@ class App extends Component {
             <Switch>
               <SecuredRoute exact path="/dashboard" component={Dashboard} />
               <SecuredRoute exact path="/addProject" component={AddProject} />
+              <SecuredRoute exact path="/dt" component={DT} />
+              <SecuredRoute exact path="/mdb" component={MDB} />
+              <SecuredRoute exact path="/enter" component={Parent} />
+              <SecuredRoute exact path="/test" component={Child} />
               <SecuredRoute
                 exact
                 path="/updateProject/:id"
@@ -72,6 +81,11 @@ class App extends Component {
                 exact
                 path="/addProjectTask/:id"
                 component={AddProjectTask}
+              />
+              <SecuredRoute
+                exact
+                path="/bulkProjectTask/:id"
+                component={BulkProjectTasks}
               />
               <SecuredRoute
                 exact
